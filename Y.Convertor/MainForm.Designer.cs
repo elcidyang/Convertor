@@ -32,6 +32,12 @@
             this.metroSetControlBox1 = new MetroSet_UI.Controls.MetroSetControlBox();
             this.metroSetTabControl1 = new MetroSet_UI.Controls.MetroSetTabControl();
             this.tpPdfConvert = new MetroSet_UI.Child.MetroSetTabPage();
+            this.panelContainer = new System.Windows.Forms.Panel();
+            this.panel7 = new System.Windows.Forms.Panel();
+            this.metroSetButton2 = new MetroSet_UI.Controls.MetroSetButton();
+            this.metroSetButton1 = new MetroSet_UI.Controls.MetroSetButton();
+            this.lblSavePath = new MetroSet_UI.Controls.MetroSetLabel();
+            this.metroSetLabel2 = new MetroSet_UI.Controls.MetroSetLabel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panelPDF1 = new System.Windows.Forms.Panel();
             this.btnPDF2PPT = new MetroSet_UI.Controls.MetroDefaultSetButton();
@@ -39,35 +45,29 @@
             this.btnPDF2JPG = new MetroSet_UI.Controls.MetroDefaultSetButton();
             this.metroSetDivider1 = new MetroSet_UI.Controls.MetroSetDivider();
             this.tpPdfDeal = new MetroSet_UI.Child.MetroSetTabPage();
-            this.tpImgConvert = new MetroSet_UI.Child.MetroSetTabPage();
-            this.metroSetLabel1 = new MetroSet_UI.Controls.MetroSetLabel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
             this.panel6 = new System.Windows.Forms.Panel();
+            this.metroDefaultSetButton6 = new MetroSet_UI.Controls.MetroDefaultSetButton();
             this.metroDefaultSetButton3 = new MetroSet_UI.Controls.MetroDefaultSetButton();
             this.metroDefaultSetButton4 = new MetroSet_UI.Controls.MetroDefaultSetButton();
             this.metroDefaultSetButton5 = new MetroSet_UI.Controls.MetroDefaultSetButton();
             this.metroSetDivider2 = new MetroSet_UI.Controls.MetroSetDivider();
-            this.metroDefaultSetButton6 = new MetroSet_UI.Controls.MetroDefaultSetButton();
-            this.panelContainer = new System.Windows.Forms.Panel();
-            this.panel7 = new System.Windows.Forms.Panel();
-            this.metroSetLabel2 = new MetroSet_UI.Controls.MetroSetLabel();
-            this.lblSavePath = new MetroSet_UI.Controls.MetroSetLabel();
-            this.metroSetButton1 = new MetroSet_UI.Controls.MetroSetButton();
-            this.metroSetButton2 = new MetroSet_UI.Controls.MetroSetButton();
+            this.tpImgConvert = new MetroSet_UI.Child.MetroSetTabPage();
+            this.metroSetLabel1 = new MetroSet_UI.Controls.MetroSetLabel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.metroSetTabControl1.SuspendLayout();
             this.tpPdfConvert.SuspendLayout();
+            this.panel7.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panelPDF1.SuspendLayout();
             this.tpPdfDeal.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel6.SuspendLayout();
-            this.panel7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // metroSetControlBox1
@@ -139,6 +139,102 @@
             this.tpPdfConvert.ThemeAuthor = "Narwin";
             this.tpPdfConvert.ThemeName = "MetroLite";
             this.tpPdfConvert.ToolTipText = null;
+            // 
+            // panelContainer
+            // 
+            this.panelContainer.BackColor = System.Drawing.Color.Transparent;
+            this.panelContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelContainer.Location = new System.Drawing.Point(182, 0);
+            this.panelContainer.Name = "panelContainer";
+            this.panelContainer.Size = new System.Drawing.Size(608, 346);
+            this.panelContainer.TabIndex = 1;
+            // 
+            // panel7
+            // 
+            this.panel7.Controls.Add(this.metroSetButton2);
+            this.panel7.Controls.Add(this.metroSetButton1);
+            this.panel7.Controls.Add(this.lblSavePath);
+            this.panel7.Controls.Add(this.metroSetLabel2);
+            this.panel7.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel7.Location = new System.Drawing.Point(182, 346);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(608, 35);
+            this.panel7.TabIndex = 2;
+            // 
+            // metroSetButton2
+            // 
+            this.metroSetButton2.DisabledBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
+            this.metroSetButton2.DisabledBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
+            this.metroSetButton2.DisabledForeColor = System.Drawing.Color.Gray;
+            this.metroSetButton2.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.metroSetButton2.HoverBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(207)))), ((int)(((byte)(255)))));
+            this.metroSetButton2.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(207)))), ((int)(((byte)(255)))));
+            this.metroSetButton2.HoverTextColor = System.Drawing.Color.White;
+            this.metroSetButton2.Location = new System.Drawing.Point(502, 4);
+            this.metroSetButton2.Name = "metroSetButton2";
+            this.metroSetButton2.NormalBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
+            this.metroSetButton2.NormalColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
+            this.metroSetButton2.NormalTextColor = System.Drawing.Color.White;
+            this.metroSetButton2.PressBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(147)))), ((int)(((byte)(195)))));
+            this.metroSetButton2.PressColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(147)))), ((int)(((byte)(195)))));
+            this.metroSetButton2.PressTextColor = System.Drawing.Color.White;
+            this.metroSetButton2.Size = new System.Drawing.Size(96, 27);
+            this.metroSetButton2.Style = MetroSet_UI.Design.Style.Light;
+            this.metroSetButton2.StyleManager = null;
+            this.metroSetButton2.TabIndex = 3;
+            this.metroSetButton2.Text = "打开目录";
+            this.metroSetButton2.ThemeAuthor = "Narwin";
+            this.metroSetButton2.ThemeName = "MetroLite";
+            // 
+            // metroSetButton1
+            // 
+            this.metroSetButton1.DisabledBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
+            this.metroSetButton1.DisabledBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
+            this.metroSetButton1.DisabledForeColor = System.Drawing.Color.Gray;
+            this.metroSetButton1.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.metroSetButton1.HoverBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(207)))), ((int)(((byte)(255)))));
+            this.metroSetButton1.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(207)))), ((int)(((byte)(255)))));
+            this.metroSetButton1.HoverTextColor = System.Drawing.Color.White;
+            this.metroSetButton1.Location = new System.Drawing.Point(120, 4);
+            this.metroSetButton1.Name = "metroSetButton1";
+            this.metroSetButton1.NormalBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
+            this.metroSetButton1.NormalColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
+            this.metroSetButton1.NormalTextColor = System.Drawing.Color.White;
+            this.metroSetButton1.PressBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(147)))), ((int)(((byte)(195)))));
+            this.metroSetButton1.PressColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(147)))), ((int)(((byte)(195)))));
+            this.metroSetButton1.PressTextColor = System.Drawing.Color.White;
+            this.metroSetButton1.Size = new System.Drawing.Size(37, 27);
+            this.metroSetButton1.Style = MetroSet_UI.Design.Style.Light;
+            this.metroSetButton1.StyleManager = null;
+            this.metroSetButton1.TabIndex = 2;
+            this.metroSetButton1.Text = "...";
+            this.metroSetButton1.ThemeAuthor = "Narwin";
+            this.metroSetButton1.ThemeName = "MetroLite";
+            // 
+            // lblSavePath
+            // 
+            this.lblSavePath.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.lblSavePath.Location = new System.Drawing.Point(163, 6);
+            this.lblSavePath.Name = "lblSavePath";
+            this.lblSavePath.Size = new System.Drawing.Size(276, 23);
+            this.lblSavePath.Style = MetroSet_UI.Design.Style.Light;
+            this.lblSavePath.StyleManager = null;
+            this.lblSavePath.TabIndex = 1;
+            this.lblSavePath.ThemeAuthor = "Narwin";
+            this.lblSavePath.ThemeName = "MetroLite";
+            // 
+            // metroSetLabel2
+            // 
+            this.metroSetLabel2.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.metroSetLabel2.Location = new System.Drawing.Point(27, 7);
+            this.metroSetLabel2.Name = "metroSetLabel2";
+            this.metroSetLabel2.Size = new System.Drawing.Size(102, 23);
+            this.metroSetLabel2.Style = MetroSet_UI.Design.Style.Light;
+            this.metroSetLabel2.StyleManager = null;
+            this.metroSetLabel2.TabIndex = 0;
+            this.metroSetLabel2.Text = "选择保存路径：";
+            this.metroSetLabel2.ThemeAuthor = "Narwin";
+            this.metroSetLabel2.ThemeName = "MetroLite";
             // 
             // panel1
             // 
@@ -277,45 +373,6 @@
             this.tpPdfDeal.ThemeName = "MetroLite";
             this.tpPdfDeal.ToolTipText = null;
             // 
-            // tpImgConvert
-            // 
-            this.tpImgConvert.BaseColor = System.Drawing.Color.White;
-            this.tpImgConvert.ImageIndex = 0;
-            this.tpImgConvert.ImageKey = null;
-            this.tpImgConvert.Location = new System.Drawing.Point(4, 34);
-            this.tpImgConvert.Name = "tpImgConvert";
-            this.tpImgConvert.Size = new System.Drawing.Size(790, 381);
-            this.tpImgConvert.Style = MetroSet_UI.Design.Style.Light;
-            this.tpImgConvert.StyleManager = null;
-            this.tpImgConvert.TabIndex = 2;
-            this.tpImgConvert.Text = "图片转换";
-            this.tpImgConvert.ThemeAuthor = "Narwin";
-            this.tpImgConvert.ThemeName = "MetroLite";
-            this.tpImgConvert.ToolTipText = null;
-            // 
-            // metroSetLabel1
-            // 
-            this.metroSetLabel1.Font = new System.Drawing.Font("微软雅黑", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.metroSetLabel1.Location = new System.Drawing.Point(16, 42);
-            this.metroSetLabel1.Name = "metroSetLabel1";
-            this.metroSetLabel1.Size = new System.Drawing.Size(100, 23);
-            this.metroSetLabel1.Style = MetroSet_UI.Design.Style.Light;
-            this.metroSetLabel1.StyleManager = null;
-            this.metroSetLabel1.TabIndex = 2;
-            this.metroSetLabel1.Text = "转换器";
-            this.metroSetLabel1.ThemeAuthor = "Narwin";
-            this.metroSetLabel1.ThemeName = "MetroLite";
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::Y.Convertor.Properties.Resources.s1logo32;
-            this.pictureBox1.Location = new System.Drawing.Point(6, 5);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(15, 15);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 3;
-            this.pictureBox1.TabStop = false;
-            // 
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.White;
@@ -364,6 +421,32 @@
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(178, 381);
             this.panel6.TabIndex = 1;
+            // 
+            // metroDefaultSetButton6
+            // 
+            this.metroDefaultSetButton6.DisabledBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
+            this.metroDefaultSetButton6.DisabledBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(155)))), ((int)(((byte)(155)))));
+            this.metroDefaultSetButton6.DisabledForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
+            this.metroDefaultSetButton6.Font = new System.Drawing.Font("微软雅黑", 9F);
+            this.metroDefaultSetButton6.HoverBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(102)))), ((int)(((byte)(102)))));
+            this.metroDefaultSetButton6.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(102)))), ((int)(((byte)(102)))));
+            this.metroDefaultSetButton6.HoverTextColor = System.Drawing.Color.White;
+            this.metroDefaultSetButton6.Location = new System.Drawing.Point(0, 117);
+            this.metroDefaultSetButton6.Margin = new System.Windows.Forms.Padding(0);
+            this.metroDefaultSetButton6.Name = "metroDefaultSetButton6";
+            this.metroDefaultSetButton6.NormalBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
+            this.metroDefaultSetButton6.NormalColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(238)))));
+            this.metroDefaultSetButton6.NormalTextColor = System.Drawing.Color.Black;
+            this.metroDefaultSetButton6.PressBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
+            this.metroDefaultSetButton6.PressColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
+            this.metroDefaultSetButton6.PressTextColor = System.Drawing.Color.White;
+            this.metroDefaultSetButton6.Size = new System.Drawing.Size(182, 38);
+            this.metroDefaultSetButton6.Style = MetroSet_UI.Design.Style.Light;
+            this.metroDefaultSetButton6.StyleManager = null;
+            this.metroDefaultSetButton6.TabIndex = 1;
+            this.metroDefaultSetButton6.Text = "PDF加密";
+            this.metroDefaultSetButton6.ThemeAuthor = "Narwin";
+            this.metroDefaultSetButton6.ThemeName = "MetroLite";
             // 
             // metroDefaultSetButton3
             // 
@@ -458,129 +541,46 @@
             this.metroSetDivider2.ThemeName = "MetroDark";
             this.metroSetDivider2.Thickness = 1;
             // 
-            // metroDefaultSetButton6
+            // tpImgConvert
             // 
-            this.metroDefaultSetButton6.DisabledBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
-            this.metroDefaultSetButton6.DisabledBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(155)))), ((int)(((byte)(155)))));
-            this.metroDefaultSetButton6.DisabledForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
-            this.metroDefaultSetButton6.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.metroDefaultSetButton6.HoverBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(102)))), ((int)(((byte)(102)))));
-            this.metroDefaultSetButton6.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(102)))), ((int)(((byte)(102)))));
-            this.metroDefaultSetButton6.HoverTextColor = System.Drawing.Color.White;
-            this.metroDefaultSetButton6.Location = new System.Drawing.Point(0, 117);
-            this.metroDefaultSetButton6.Margin = new System.Windows.Forms.Padding(0);
-            this.metroDefaultSetButton6.Name = "metroDefaultSetButton6";
-            this.metroDefaultSetButton6.NormalBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
-            this.metroDefaultSetButton6.NormalColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(238)))));
-            this.metroDefaultSetButton6.NormalTextColor = System.Drawing.Color.Black;
-            this.metroDefaultSetButton6.PressBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
-            this.metroDefaultSetButton6.PressColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
-            this.metroDefaultSetButton6.PressTextColor = System.Drawing.Color.White;
-            this.metroDefaultSetButton6.Size = new System.Drawing.Size(182, 38);
-            this.metroDefaultSetButton6.Style = MetroSet_UI.Design.Style.Light;
-            this.metroDefaultSetButton6.StyleManager = null;
-            this.metroDefaultSetButton6.TabIndex = 1;
-            this.metroDefaultSetButton6.Text = "PDF加密";
-            this.metroDefaultSetButton6.ThemeAuthor = "Narwin";
-            this.metroDefaultSetButton6.ThemeName = "MetroLite";
+            this.tpImgConvert.BaseColor = System.Drawing.Color.White;
+            this.tpImgConvert.ImageIndex = 0;
+            this.tpImgConvert.ImageKey = null;
+            this.tpImgConvert.Location = new System.Drawing.Point(4, 34);
+            this.tpImgConvert.Name = "tpImgConvert";
+            this.tpImgConvert.Size = new System.Drawing.Size(790, 381);
+            this.tpImgConvert.Style = MetroSet_UI.Design.Style.Light;
+            this.tpImgConvert.StyleManager = null;
+            this.tpImgConvert.TabIndex = 2;
+            this.tpImgConvert.Text = "图片转换";
+            this.tpImgConvert.ThemeAuthor = "Narwin";
+            this.tpImgConvert.ThemeName = "MetroLite";
+            this.tpImgConvert.ToolTipText = null;
             // 
-            // panelContainer
+            // metroSetLabel1
             // 
-            this.panelContainer.BackColor = System.Drawing.Color.Transparent;
-            this.panelContainer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelContainer.Location = new System.Drawing.Point(182, 0);
-            this.panelContainer.Name = "panelContainer";
-            this.panelContainer.Size = new System.Drawing.Size(608, 346);
-            this.panelContainer.TabIndex = 1;
+            this.metroSetLabel1.Font = new System.Drawing.Font("微软雅黑", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.metroSetLabel1.Location = new System.Drawing.Point(16, 42);
+            this.metroSetLabel1.Name = "metroSetLabel1";
+            this.metroSetLabel1.Size = new System.Drawing.Size(100, 23);
+            this.metroSetLabel1.Style = MetroSet_UI.Design.Style.Light;
+            this.metroSetLabel1.StyleManager = null;
+            this.metroSetLabel1.TabIndex = 2;
+            this.metroSetLabel1.Text = "转换器";
+            this.metroSetLabel1.ThemeAuthor = "Narwin";
+            this.metroSetLabel1.ThemeName = "MetroLite";
             // 
-            // panel7
+            // pictureBox1
             // 
-            this.panel7.Controls.Add(this.metroSetButton2);
-            this.panel7.Controls.Add(this.metroSetButton1);
-            this.panel7.Controls.Add(this.lblSavePath);
-            this.panel7.Controls.Add(this.metroSetLabel2);
-            this.panel7.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel7.Location = new System.Drawing.Point(182, 346);
-            this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(608, 35);
-            this.panel7.TabIndex = 2;
+            this.pictureBox1.Image = global::Y.Convertor.Properties.Resources.s1logo32;
+            this.pictureBox1.Location = new System.Drawing.Point(6, 5);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(15, 15);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 3;
+            this.pictureBox1.TabStop = false;
             // 
-            // metroSetLabel2
-            // 
-            this.metroSetLabel2.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.metroSetLabel2.Location = new System.Drawing.Point(27, 6);
-            this.metroSetLabel2.Name = "metroSetLabel2";
-            this.metroSetLabel2.Size = new System.Drawing.Size(100, 23);
-            this.metroSetLabel2.Style = MetroSet_UI.Design.Style.Light;
-            this.metroSetLabel2.StyleManager = null;
-            this.metroSetLabel2.TabIndex = 0;
-            this.metroSetLabel2.Text = "选择保存路径：";
-            this.metroSetLabel2.ThemeAuthor = "Narwin";
-            this.metroSetLabel2.ThemeName = "MetroLite";
-            // 
-            // lblSavePath
-            // 
-            this.lblSavePath.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.lblSavePath.Location = new System.Drawing.Point(163, 6);
-            this.lblSavePath.Name = "lblSavePath";
-            this.lblSavePath.Size = new System.Drawing.Size(276, 23);
-            this.lblSavePath.Style = MetroSet_UI.Design.Style.Light;
-            this.lblSavePath.StyleManager = null;
-            this.lblSavePath.TabIndex = 1;
-            this.lblSavePath.ThemeAuthor = "Narwin";
-            this.lblSavePath.ThemeName = "MetroLite";
-            // 
-            // metroSetButton1
-            // 
-            this.metroSetButton1.DisabledBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
-            this.metroSetButton1.DisabledBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
-            this.metroSetButton1.DisabledForeColor = System.Drawing.Color.Gray;
-            this.metroSetButton1.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.metroSetButton1.HoverBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(207)))), ((int)(((byte)(255)))));
-            this.metroSetButton1.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(207)))), ((int)(((byte)(255)))));
-            this.metroSetButton1.HoverTextColor = System.Drawing.Color.White;
-            this.metroSetButton1.Location = new System.Drawing.Point(120, 4);
-            this.metroSetButton1.Name = "metroSetButton1";
-            this.metroSetButton1.NormalBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
-            this.metroSetButton1.NormalColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
-            this.metroSetButton1.NormalTextColor = System.Drawing.Color.White;
-            this.metroSetButton1.PressBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(147)))), ((int)(((byte)(195)))));
-            this.metroSetButton1.PressColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(147)))), ((int)(((byte)(195)))));
-            this.metroSetButton1.PressTextColor = System.Drawing.Color.White;
-            this.metroSetButton1.Size = new System.Drawing.Size(37, 27);
-            this.metroSetButton1.Style = MetroSet_UI.Design.Style.Light;
-            this.metroSetButton1.StyleManager = null;
-            this.metroSetButton1.TabIndex = 2;
-            this.metroSetButton1.Text = "...";
-            this.metroSetButton1.ThemeAuthor = "Narwin";
-            this.metroSetButton1.ThemeName = "MetroLite";
-            // 
-            // metroSetButton2
-            // 
-            this.metroSetButton2.DisabledBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
-            this.metroSetButton2.DisabledBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
-            this.metroSetButton2.DisabledForeColor = System.Drawing.Color.Gray;
-            this.metroSetButton2.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.metroSetButton2.HoverBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(207)))), ((int)(((byte)(255)))));
-            this.metroSetButton2.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(207)))), ((int)(((byte)(255)))));
-            this.metroSetButton2.HoverTextColor = System.Drawing.Color.White;
-            this.metroSetButton2.Location = new System.Drawing.Point(502, 4);
-            this.metroSetButton2.Name = "metroSetButton2";
-            this.metroSetButton2.NormalBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
-            this.metroSetButton2.NormalColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
-            this.metroSetButton2.NormalTextColor = System.Drawing.Color.White;
-            this.metroSetButton2.PressBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(147)))), ((int)(((byte)(195)))));
-            this.metroSetButton2.PressColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(147)))), ((int)(((byte)(195)))));
-            this.metroSetButton2.PressTextColor = System.Drawing.Color.White;
-            this.metroSetButton2.Size = new System.Drawing.Size(96, 27);
-            this.metroSetButton2.Style = MetroSet_UI.Design.Style.Light;
-            this.metroSetButton2.StyleManager = null;
-            this.metroSetButton2.TabIndex = 3;
-            this.metroSetButton2.Text = "打开目录";
-            this.metroSetButton2.ThemeAuthor = "Narwin";
-            this.metroSetButton2.ThemeName = "MetroLite";
-            // 
-            // Form1
+            // MainForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(800, 494);
@@ -591,7 +591,7 @@
             this.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.HeaderHeight = 50;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "Form1";
+            this.Name = "MainForm";
             this.Padding = new System.Windows.Forms.Padding(12, 90, 12, 12);
             this.SmallRectThickness = 1;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -600,15 +600,15 @@
             this.TextColor = System.Drawing.Color.White;
             this.metroSetTabControl1.ResumeLayout(false);
             this.tpPdfConvert.ResumeLayout(false);
+            this.panel7.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panelPDF1.ResumeLayout(false);
             this.tpPdfDeal.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel3.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
             this.panel6.ResumeLayout(false);
-            this.panel7.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }

@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using MetroSet_UI.Controls;
 using MetroSet_UI.Forms;
+using Y.Convertor.uc;
 
 namespace Y.Convertor
 {
@@ -16,6 +17,13 @@ namespace Y.Convertor
         {
             ClearBtnsColor();
             SetBtnClick(this.btnPDF2JPG);
+            this.panelContainer.Controls.Clear();
+            var uc = new ucPdf2Img
+            {
+                Dock = DockStyle.Fill,
+                AllowDrop = true
+            };
+            this.panelContainer.Controls.Add(uc);
         }
 
         
