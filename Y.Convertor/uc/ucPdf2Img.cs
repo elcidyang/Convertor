@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using XPTable.Models;
 using Y.Convertor.Common;
 using Y.Convertor.Models;
+using RowStyle = XPTable.Models.RowStyle;
 
 namespace Y.Convertor.uc
 {
@@ -18,7 +15,92 @@ namespace Y.Convertor.uc
         {
             InitializeComponent();
             SetConvertBtnVisiable(false);
+            InitTable();
+            this.cboImgType.SelectedIndex = 0;
         }
+
+
+        #region table
+
+        private const int FileNameColIndex = 0;
+        private const int FileSizeColIndex = 1;
+        private const int PageStartColIndex = 2;
+        private const int PageEndColIndex = 3;
+        private const int ProgressColIndex = 4;
+        private const int DeleteColIndex = 5;
+        private const int FilePathColIndex = 6;
+        /// <summary>
+        /// 初始化表格
+        /// </summary>
+        private void InitTable()
+        {
+            this.tableFiles.ColumnModel = this.columnModel;
+            this.tableFiles.TableModel = this.tableModel;
+            this.tableFiles.CellMouseDown += TableFiles_CellMouseDown;
+            this.tableFiles.CellMouseEnter += TableFiles_CellMouseEnter;
+            this.tableFiles.CellMouseLeave += TableFiles_CellMouseLeave;
+            ImageColumn fileNameColumn = new ImageColumn("文件名", 240)
+            {
+                DrawText = true
+            };
+            TextColumn fileSizeColumn = new TextColumn("文件大小", 90)
+            {
+                Editable = false
+            };
+            NumberColumn pageStartColumn = new NumberColumn("起始页", 60)
+            {
+                Editable = true,
+                Minimum = 1,
+                Maximum = 2000,
+                ShowUpDownButtons = true
+            };
+            NumberColumn pageEndColumn = new NumberColumn("结束页", 60)
+            {
+                Editable = true,
+                Minimum = 1,
+                Maximum = 2000,
+                ShowUpDownButtons = true
+            };
+            ProgressBarColumn progressColumn = new ProgressBarColumn("状态", 100);
+            ImageColumn deleteColumn = new ImageColumn("删除", 35)
+            {
+                DrawText = false
+            };
+            TextColumn filePathColumn = new TextColumn("文件路径",null,0,false);
+            this.columnModel.Columns.AddRange(new Column[] {fileNameColumn,
+                fileSizeColumn,
+                pageStartColumn,
+                pageEndColumn,
+                progressColumn,
+                deleteColumn,filePathColumn });
+        }
+
+        private void TableFiles_CellMouseLeave(object sender, XPTable.Events.CellMouseEventArgs e)
+        {
+            if (e.Column == DeleteColIndex)
+            {
+                var cell = this.tableFiles.TableModel.Rows[e.Row].Cells[e.Column];
+                cell.Image = Properties.Resources.trash_empty;
+            }
+        }
+
+        private void TableFiles_CellMouseEnter(object sender, XPTable.Events.CellMouseEventArgs e)
+        {
+            if (e.Column == DeleteColIndex)
+            {
+                var cell = this.tableFiles.TableModel.Rows[e.Row].Cells[e.Column];
+                cell.Image = Properties.Resources.trash_empty_alt;
+            }
+        }
+
+        private void TableFiles_CellMouseDown(object sender, XPTable.Events.CellMouseEventArgs e)
+        {
+            if (e.Column == DeleteColIndex)
+            {
+                this.tableFiles.TableModel.Rows.RemoveAt(e.Row);
+            }
+        }
+        #endregion
 
         private void ucPdf2Imgcs_DragEnter(object sender, DragEventArgs e)
         {
@@ -45,6 +127,7 @@ namespace Y.Convertor.uc
                 if (pdfFiles.Count > 0)
                 {
                     ClearDragTip();
+                    FillDataGrid(pdfFiles);
                 }
             }
         }
@@ -76,8 +159,35 @@ namespace Y.Convertor.uc
             ClearDragTip();
             var safeFiles = fileDialog.SafeFileNames;
             var filePaths = fileDialog.FileNames;
-            var pafFiles = TransformPdfFiles(files, safeFiles, filePaths);
-            //FillDataGrid(pdf2Jpgs);
+            var pdfFiles = TransformPdfFiles(files, safeFiles, filePaths);
+            FillDataGrid(pdfFiles);
+        }
+
+        private void FillDataGrid(List<Pdf2JpgFileInfo> pdfFiles)
+        {
+            var rowStyle = new RowStyle
+            {
+                Font = new Font("微软雅黑", 9f, FontStyle.Regular)
+            };
+            var index = this.tableFiles.TableModel.Rows.Count;
+            foreach (var pdfFile in pdfFiles)
+            {
+                var row = new Row();
+                row.Cells.AddRange(new Cell[]
+                {
+                    new Cell(pdfFile.FileName, Properties.Resources.pdf_ico),
+                    new Cell(Utils.CountSize(Utils.GetFileSize(pdfFile.FilePath))),
+                    new Cell(1),
+                    new Cell(100),
+                    new Cell(0),
+                    new Cell("删除", Properties.Resources.trash_empty),
+                    new Cell(pdfFile.FilePath)
+                });
+                this.tableFiles.TableModel.Rows.Add(row);
+                this.tableFiles.TableModel.Rows[index].RowStyle = rowStyle;
+                index++;
+            }
+
         }
 
         private void ClearDragTip()
@@ -116,7 +226,7 @@ namespace Y.Convertor.uc
         {
             var pdfFile = new Pdf2JpgFileInfo();
             pdfFile.FilePath = filePath;
-            pdfFile.FileName = filePath.Substring(filePath.LastIndexOf("\\"),filePath.Length- filePath.LastIndexOf("\\")+1);
+            pdfFile.FileName = filePath.Substring(filePath.LastIndexOf("\\"), filePath.Length - filePath.LastIndexOf("\\") + 1);
             pdfFile.FileSize = Utils.CountSize(Utils.GetFileSize(filePath));
             return pdfFile;
         }
@@ -125,15 +235,19 @@ namespace Y.Convertor.uc
         {
             if (isShow)
             {
-                this.btnContinueAdd.Show();
-                this.btnStartConvert.Show();
+                tableFiles.Show();
+                panelBottom.Show();
             }
             else
             {
-                this.btnContinueAdd.Hide();
-                this.btnStartConvert.Hide();
+                tableFiles.Hide();
+                panelBottom.Hide();
             }
         }
 
+        private void btnContinueAdd_Click(object sender, EventArgs e)
+        {
+            ShowOpenFileDialog();
+        }
     }
 }

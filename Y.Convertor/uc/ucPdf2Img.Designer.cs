@@ -31,6 +31,14 @@
             this.lblTip = new System.Windows.Forms.Label();
             this.btnStartConvert = new MetroSet_UI.Controls.MetroSetButton();
             this.btnContinueAdd = new MetroSet_UI.Controls.MetroDefaultSetButton();
+            this.panelBottom = new System.Windows.Forms.Panel();
+            this.cboImgType = new MetroSet_UI.Controls.MetroSetComboBox();
+            this.metroSetLabel1 = new MetroSet_UI.Controls.MetroSetLabel();
+            this.tableFiles = new XPTable.Models.Table();
+            this.columnModel = new XPTable.Models.ColumnModel();
+            this.tableModel = new XPTable.Models.TableModel();
+            this.panelBottom.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tableFiles)).BeginInit();
             this.SuspendLayout();
             // 
             // lblTip
@@ -54,7 +62,7 @@
             this.btnStartConvert.HoverBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(207)))), ((int)(((byte)(255)))));
             this.btnStartConvert.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(207)))), ((int)(((byte)(255)))));
             this.btnStartConvert.HoverTextColor = System.Drawing.Color.White;
-            this.btnStartConvert.Location = new System.Drawing.Point(323, 303);
+            this.btnStartConvert.Location = new System.Drawing.Point(412, 10);
             this.btnStartConvert.Name = "btnStartConvert";
             this.btnStartConvert.NormalBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
             this.btnStartConvert.NormalColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
@@ -79,7 +87,7 @@
             this.btnContinueAdd.HoverBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(102)))), ((int)(((byte)(102)))));
             this.btnContinueAdd.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(102)))), ((int)(((byte)(102)))));
             this.btnContinueAdd.HoverTextColor = System.Drawing.Color.White;
-            this.btnContinueAdd.Location = new System.Drawing.Point(196, 303);
+            this.btnContinueAdd.Location = new System.Drawing.Point(285, 10);
             this.btnContinueAdd.Name = "btnContinueAdd";
             this.btnContinueAdd.NormalBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
             this.btnContinueAdd.NormalColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(238)))));
@@ -94,19 +102,104 @@
             this.btnContinueAdd.Text = "继续添加";
             this.btnContinueAdd.ThemeAuthor = "Narwin";
             this.btnContinueAdd.ThemeName = "MetroLite";
+            this.btnContinueAdd.Click += new System.EventHandler(this.btnContinueAdd_Click);
+            // 
+            // panelBottom
+            // 
+            this.panelBottom.Controls.Add(this.cboImgType);
+            this.panelBottom.Controls.Add(this.metroSetLabel1);
+            this.panelBottom.Controls.Add(this.btnStartConvert);
+            this.panelBottom.Controls.Add(this.btnContinueAdd);
+            this.panelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panelBottom.Location = new System.Drawing.Point(0, 300);
+            this.panelBottom.Name = "panelBottom";
+            this.panelBottom.Size = new System.Drawing.Size(608, 46);
+            this.panelBottom.TabIndex = 4;
+            // 
+            // cboImgType
+            // 
+            this.cboImgType.AllowDrop = true;
+            this.cboImgType.ArrowColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(150)))), ((int)(((byte)(150)))));
+            this.cboImgType.BackColor = System.Drawing.Color.Transparent;
+            this.cboImgType.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(238)))));
+            this.cboImgType.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(150)))), ((int)(((byte)(150)))));
+            this.cboImgType.CausesValidation = false;
+            this.cboImgType.DisabledBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
+            this.cboImgType.DisabledBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(155)))), ((int)(((byte)(155)))));
+            this.cboImgType.DisabledForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
+            this.cboImgType.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cboImgType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboImgType.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.cboImgType.FormattingEnabled = true;
+            this.cboImgType.ItemHeight = 20;
+            this.cboImgType.Items.AddRange(new object[] {
+            "JPG",
+            "PNG",
+            "GIF",
+            "BMP",
+            "TIF"});
+            this.cboImgType.Location = new System.Drawing.Point(129, 10);
+            this.cboImgType.Name = "cboImgType";
+            this.cboImgType.SelectedItemBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
+            this.cboImgType.SelectedItemForeColor = System.Drawing.Color.White;
+            this.cboImgType.Size = new System.Drawing.Size(69, 26);
+            this.cboImgType.Style = MetroSet_UI.Design.Style.Light;
+            this.cboImgType.StyleManager = null;
+            this.cboImgType.TabIndex = 4;
+            this.cboImgType.ThemeAuthor = "Narwin";
+            this.cboImgType.ThemeName = "MetroLite";
+            // 
+            // metroSetLabel1
+            // 
+            this.metroSetLabel1.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.metroSetLabel1.Location = new System.Drawing.Point(31, 12);
+            this.metroSetLabel1.Name = "metroSetLabel1";
+            this.metroSetLabel1.Size = new System.Drawing.Size(103, 23);
+            this.metroSetLabel1.Style = MetroSet_UI.Design.Style.Light;
+            this.metroSetLabel1.StyleManager = null;
+            this.metroSetLabel1.TabIndex = 5;
+            this.metroSetLabel1.Text = "生成图片格式：";
+            this.metroSetLabel1.ThemeAuthor = "Narwin";
+            this.metroSetLabel1.ThemeName = "MetroLite";
+            // 
+            // tableFiles
+            // 
+            this.tableFiles.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableFiles.EditStartAction = XPTable.Editors.EditStartAction.SingleClick;
+            this.tableFiles.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tableFiles.GridColor = System.Drawing.Color.LightGray;
+            this.tableFiles.GridLines = XPTable.Models.GridLines.Both;
+            this.tableFiles.GridLineStyle = XPTable.Models.GridLineStyle.Dash;
+            this.tableFiles.HeaderFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tableFiles.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.tableFiles.HideSelection = true;
+            this.tableFiles.Location = new System.Drawing.Point(0, 0);
+            this.tableFiles.Name = "tableFiles";
+            this.tableFiles.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
+            this.tableFiles.SelectionForeColor = System.Drawing.Color.White;
+            this.tableFiles.SelectionStyle = XPTable.Models.SelectionStyle.Grid;
+            this.tableFiles.Size = new System.Drawing.Size(608, 300);
+            this.tableFiles.TabIndex = 5;
+            this.tableFiles.Text = "table1";
+            // 
+            // tableModel
+            // 
+            this.tableModel.RowHeight = 35;
             // 
             // ucPdf2Img
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.White;
-            this.Controls.Add(this.btnContinueAdd);
-            this.Controls.Add(this.btnStartConvert);
+            this.Controls.Add(this.tableFiles);
+            this.Controls.Add(this.panelBottom);
             this.Controls.Add(this.lblTip);
             this.Name = "ucPdf2Img";
             this.Size = new System.Drawing.Size(608, 346);
             this.Click += new System.EventHandler(this.ucPdf2Img_Click);
             this.DragDrop += new System.Windows.Forms.DragEventHandler(this.ucPdf2Img_DragDrop);
             this.DragEnter += new System.Windows.Forms.DragEventHandler(this.ucPdf2Imgcs_DragEnter);
+            this.panelBottom.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.tableFiles)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -116,5 +209,11 @@
         private System.Windows.Forms.Label lblTip;
         private MetroSet_UI.Controls.MetroSetButton btnStartConvert;
         private MetroSet_UI.Controls.MetroDefaultSetButton btnContinueAdd;
+        private System.Windows.Forms.Panel panelBottom;
+        private MetroSet_UI.Controls.MetroSetComboBox cboImgType;
+        private MetroSet_UI.Controls.MetroSetLabel metroSetLabel1;
+        private XPTable.Models.Table tableFiles;
+        private XPTable.Models.ColumnModel columnModel;
+        private XPTable.Models.TableModel tableModel;
     }
 }

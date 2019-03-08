@@ -47,9 +47,11 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="XPTable">
+      <HintPath>lib\XPTable.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Common\CustomImage.cs" />
     <Compile Include="Common\RmbUpperConverter.cs" />
     <Compile Include="Common\Utils.cs" />
     <Compile Include="MainForm.cs">
@@ -99,6 +101,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\s1logo32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pdf_ico.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\trash_empty.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\trash_empty_alt.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

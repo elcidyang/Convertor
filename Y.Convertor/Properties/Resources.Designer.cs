@@ -63,9 +63,39 @@ namespace Y.Convertor.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap pdf_ico {
+            get {
+                object obj = ResourceManager.GetObject("pdf_ico", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap s1logo32 {
             get {
                 object obj = ResourceManager.GetObject("s1logo32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap trash_empty {
+            get {
+                object obj = ResourceManager.GetObject("trash_empty", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap trash_empty_alt {
+            get {
+                object obj = ResourceManager.GetObject("trash_empty_alt", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

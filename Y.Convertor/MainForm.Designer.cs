@@ -54,6 +54,7 @@
             this.metroDefaultSetButton4 = new MetroSet_UI.Controls.MetroDefaultSetButton();
             this.metroDefaultSetButton5 = new MetroSet_UI.Controls.MetroDefaultSetButton();
             this.metroSetDivider2 = new MetroSet_UI.Controls.MetroSetDivider();
+            this.tpOtherTools = new System.Windows.Forms.TabPage();
             this.tpImgConvert = new MetroSet_UI.Child.MetroSetTabPage();
             this.metroSetLabel1 = new MetroSet_UI.Controls.MetroSetLabel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -103,7 +104,8 @@
             this.metroSetTabControl1.Controls.Add(this.tpPdfConvert);
             this.metroSetTabControl1.Controls.Add(this.tpPdfDeal);
             this.metroSetTabControl1.Controls.Add(this.tpImgConvert);
-            this.metroSetTabControl1.Cursor = System.Windows.Forms.Cursors.Default;
+            this.metroSetTabControl1.Controls.Add(this.tpOtherTools);
+            this.metroSetTabControl1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.metroSetTabControl1.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.metroSetTabControl1.HotTrack = true;
             this.metroSetTabControl1.ItemSize = new System.Drawing.Size(500, 30);
@@ -113,7 +115,6 @@
             this.metroSetTabControl1.Size = new System.Drawing.Size(798, 419);
             this.metroSetTabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.metroSetTabControl1.Speed = 100;
-            this.metroSetTabControl1.Style = MetroSet_UI.Design.Style.Light;
             this.metroSetTabControl1.StyleManager = null;
             this.metroSetTabControl1.TabIndex = 1;
             this.metroSetTabControl1.TabStyle = MetroSet_UI.Enums.TabStyle.Style1;
@@ -541,6 +542,14 @@
             this.metroSetDivider2.ThemeName = "MetroDark";
             this.metroSetDivider2.Thickness = 1;
             // 
+            // tpOtherTools
+            // 
+            this.tpOtherTools.Location = new System.Drawing.Point(4, 34);
+            this.tpOtherTools.Name = "tpOtherTools";
+            this.tpOtherTools.Size = new System.Drawing.Size(790, 381);
+            this.tpOtherTools.TabIndex = 3;
+            this.tpOtherTools.Text = "其他工具";
+            // 
             // tpImgConvert
             // 
             this.tpImgConvert.BaseColor = System.Drawing.Color.White;
@@ -643,6 +652,7 @@
         private MetroSet_UI.Controls.MetroSetButton metroSetButton1;
         private MetroSet_UI.Controls.MetroSetLabel lblSavePath;
         private MetroSet_UI.Controls.MetroSetButton metroSetButton2;
+        private System.Windows.Forms.TabPage tpOtherTools;
     }
 }
 
