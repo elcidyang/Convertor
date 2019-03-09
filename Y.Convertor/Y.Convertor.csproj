@@ -21,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -32,6 +33,21 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Aspose.Cells">
+      <HintPath>lib\Aspose.Cells.dll</HintPath>
+    </Reference>
+    <Reference Include="Aspose.Imaging">
+      <HintPath>lib\Aspose.Imaging.dll</HintPath>
+    </Reference>
+    <Reference Include="Aspose.OCR">
+      <HintPath>lib\Aspose.OCR.dll</HintPath>
+    </Reference>
+    <Reference Include="Aspose.Pdf">
+      <HintPath>lib\Aspose.Pdf.dll</HintPath>
+    </Reference>
+    <Reference Include="Aspose.Words">
+      <HintPath>lib\Aspose.Words.dll</HintPath>
+    </Reference>
     <Reference Include="MetroSet UI, Version=1.0.3.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>lib\MetroSet UI.dll</HintPath>
@@ -54,6 +70,12 @@
   <ItemGroup>
     <Compile Include="Common\RmbUpperConverter.cs" />
     <Compile Include="Common\Utils.cs" />
+    <Compile Include="FrmMessageBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmMessageBox.Designer.cs">
+      <DependentUpon>FrmMessageBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -62,6 +84,7 @@
     </Compile>
     <Compile Include="Models\FileInfo.cs" />
     <Compile Include="Models\Pdf2JpgFileInfo.cs" />
+    <Compile Include="ModifyInMemory.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="uc\ucPdf2Img.cs">
@@ -70,6 +93,9 @@
     <Compile Include="uc\ucPdf2Img.Designer.cs">
       <DependentUpon>ucPdf2Img.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="FrmMessageBox.resx">
+      <DependentUpon>FrmMessageBox.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>

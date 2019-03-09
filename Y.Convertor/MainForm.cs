@@ -7,10 +7,15 @@ using Y.Convertor.uc;
 namespace Y.Convertor
 {
     public partial class MainForm : MetroSetForm
-    {
+    { 
+        /// <summary>
+        /// 保存路径
+        /// </summary>
+        public MetroSetLabel LbllblSavePath;
         public MainForm()
         {
             InitializeComponent();
+            LbllblSavePath = this.lblSavePath;
         }
 
         private void btnPDF2JPG_Click(object sender, System.EventArgs e)
@@ -18,7 +23,7 @@ namespace Y.Convertor
             ClearBtnsColor();
             SetBtnClick(this.btnPDF2JPG);
             this.panelContainer.Controls.Clear();
-            var uc = new ucPdf2Img
+            var uc = new ucPdf2Img(this)
             {
                 Dock = DockStyle.Fill,
                 AllowDrop = true
@@ -64,5 +69,18 @@ namespace Y.Convertor
             }
         }
 
+        private void btnSelectSavePath_Click(object sender, System.EventArgs e)
+        {
+            FolderBrowserDialog dialog = new FolderBrowserDialog
+            {
+                ShowNewFolderButton = true
+            };
+            dialog.ShowDialog();
+            var path = dialog.SelectedPath;
+            if (!string.IsNullOrEmpty(path))
+            {
+                this.lblSavePath.Text = path;
+            }
+        }
     }
 }

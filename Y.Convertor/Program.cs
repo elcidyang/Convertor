@@ -16,6 +16,7 @@ namespace Y.Convertor
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            ModifyInMemory.ActivateMemoryPatching();
             Application.Run(new MainForm());
         }
     }

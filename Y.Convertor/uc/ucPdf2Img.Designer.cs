@@ -77,6 +77,7 @@
             this.btnStartConvert.Text = "开始转换";
             this.btnStartConvert.ThemeAuthor = "Narwin";
             this.btnStartConvert.ThemeName = "MetroLite";
+            this.btnStartConvert.Click += new System.EventHandler(this.btnStartConvert_Click);
             // 
             // btnContinueAdd
             // 

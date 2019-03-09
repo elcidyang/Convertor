@@ -1,19 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
+using System.Linq;
+using System.Threading;
 using System.Windows.Forms;
+using Aspose.Pdf;
+using Aspose.Pdf.Devices;
+using MetroSet_UI.Forms;
 using XPTable.Models;
 using Y.Convertor.Common;
 using Y.Convertor.Models;
+using Cell = XPTable.Models.Cell;
+using Row = XPTable.Models.Row;
 using RowStyle = XPTable.Models.RowStyle;
 
 namespace Y.Convertor.uc
 {
     public partial class ucPdf2Img : UserControl
     {
-        public ucPdf2Img()
+        private MainForm _mainForm;
+        public delegate void ProgrssNotice(int rowIndex, int pageIndex, int per);
+        public delegate void ConvertComplete();
+        private Thread convertThread = null;
+        public ucPdf2Img(MainForm mainForm)
         {
             InitializeComponent();
+            _mainForm = mainForm;
             SetConvertBtnVisiable(false);
             InitTable();
             this.cboImgType.SelectedIndex = 0;
@@ -98,6 +111,11 @@ namespace Y.Convertor.uc
             if (e.Column == DeleteColIndex)
             {
                 this.tableFiles.TableModel.Rows.RemoveAt(e.Row);
+                if (this.tableFiles.TableModel.Rows.Count <= 0)
+                {
+                    SetConvertBtnVisiable(false);
+                    AddDragTip();
+                }
             }
         }
         #endregion
@@ -110,7 +128,6 @@ namespace Y.Convertor.uc
 
         private void ucPdf2Img_DragDrop(object sender, DragEventArgs e)
         {
-            this.lblTip.Visible = false;
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
                 var pdfFiles = new List<Pdf2JpgFileInfo>();
@@ -127,6 +144,7 @@ namespace Y.Convertor.uc
                 if (pdfFiles.Count > 0)
                 {
                     ClearDragTip();
+                    SetConvertBtnVisiable(true);
                     FillDataGrid(pdfFiles);
                 }
             }
@@ -155,8 +173,9 @@ namespace Y.Convertor.uc
             {
                 return;
             }
-            SetConvertBtnVisiable(true);
+            
             ClearDragTip();
+            SetConvertBtnVisiable(true);
             var safeFiles = fileDialog.SafeFileNames;
             var filePaths = fileDialog.FileNames;
             var pdfFiles = TransformPdfFiles(files, safeFiles, filePaths);
@@ -170,8 +189,14 @@ namespace Y.Convertor.uc
                 Font = new Font("微软雅黑", 9f, FontStyle.Regular)
             };
             var index = this.tableFiles.TableModel.Rows.Count;
+            var sameFilesName = new List<string>();
             foreach (var pdfFile in pdfFiles)
             {
+                if (IsExistSameFileName(pdfFile.FileName))
+                {
+                    sameFilesName.Add(pdfFile.FileName);
+                    continue;
+                }
                 var row = new Row();
                 row.Cells.AddRange(new Cell[]
                 {
@@ -188,22 +213,35 @@ namespace Y.Convertor.uc
                 index++;
             }
 
+            if (sameFilesName.Count > 0)
+            {
+                var tip = string.Empty;
+                if (sameFilesName.Count > 5)
+                {
+                    sameFilesName = sameFilesName.Take(5).ToList();
+                    sameFilesName.Add("... ...");
+                }
+                var height = sameFilesName.Count * 20 + 150;
+                var strNames = string.Join("\n", sameFilesName);
+                ShowMsgBox(height, $"下列文件：\n{strNames}\n已存在，将忽略添加！");
+            }
         }
 
-        private void ClearDragTip()
+        /// <summary>
+        /// 表格中是否已存在相同文件名文件
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <returns></returns>
+        private bool IsExistSameFileName(string fileName)
         {
-            this.lblTip.Hide();
-            this.lblTip.Click -= lblTip_Click;
-            this.Click -= ucPdf2Img_Click;
-        }
-
-        private void AddDragTip()
-        {
-            this.lblTip.Click -= lblTip_Click;
-            this.Click -= ucPdf2Img_Click;
-            this.lblTip.Show();
-            this.lblTip.Click += lblTip_Click;
-            this.Click += ucPdf2Img_Click;
+            foreach (Row row in this.tableFiles.TableModel.Rows)
+            {
+                if (row.Cells[FileNameColIndex].Text == fileName)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         private List<Pdf2JpgFileInfo> TransformPdfFiles(string[] files, string[] safeFiles, string[] filePaths)
@@ -226,7 +264,7 @@ namespace Y.Convertor.uc
         {
             var pdfFile = new Pdf2JpgFileInfo();
             pdfFile.FilePath = filePath;
-            pdfFile.FileName = filePath.Substring(filePath.LastIndexOf("\\"), filePath.Length - filePath.LastIndexOf("\\") + 1);
+            pdfFile.FileName = filePath.Substring(filePath.LastIndexOf("\\")+1, filePath.Length - filePath.LastIndexOf("\\") - 1);
             pdfFile.FileSize = Utils.CountSize(Utils.GetFileSize(filePath));
             return pdfFile;
         }
@@ -245,9 +283,134 @@ namespace Y.Convertor.uc
             }
         }
 
+        private void ClearDragTip()
+        {
+            this.lblTip.Hide();
+            this.lblTip.Click -= lblTip_Click;
+            this.Click -= ucPdf2Img_Click;
+        }
+
+        private void AddDragTip()
+        {
+            this.lblTip.Click -= lblTip_Click;
+            this.Click -= ucPdf2Img_Click;
+            this.lblTip.Show();
+            this.lblTip.Click += lblTip_Click;
+            this.Click += ucPdf2Img_Click;
+        }
+
         private void btnContinueAdd_Click(object sender, EventArgs e)
         {
             ShowOpenFileDialog();
+        }
+
+        private void btnStartConvert_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(_mainForm.LbllblSavePath.Text.Trim()))
+            {
+                ShowMsgBox(100, "请先选择要保存的路径！");
+                return;
+            }
+            ProgrssNotice notice = ProgrssAction;//创建一个委托对象
+            if (convertThread != null)
+            {
+                convertThread = null;
+            }
+            convertThread = new Thread(StartConvert);
+            var imgType = GetConvertedImgType();
+            convertThread.Start(new List<object> { notice,imgType });
+        }
+
+        /// <summary>
+        /// 开始转换
+        /// </summary>
+        public void StartConvert(object p)
+        {
+            var savePath = _mainForm.LbllblSavePath.Text;
+            var rowIndex = 0;
+            var parameters = p as List<object>;
+            var noticeAction = parameters[0];
+            var imgType = parameters[1].ToString();
+            foreach (Row row in this.tableFiles.TableModel.Rows)
+            {
+                var filePath = row.Cells[FilePathColIndex].Text;
+                var fileName = row.Cells[FileNameColIndex].Text;
+                var fullFileName = Path.Combine(savePath, fileName.Contains(".") ?
+                    fileName.Remove(fileName.LastIndexOf(".")) : fileName);
+                if (!Directory.Exists(fullFileName))
+                {
+                    Directory.CreateDirectory(fullFileName);
+                }
+                Document pdfDocument = new Document(filePath);
+                var pageCount = pdfDocument.Pages.Count;
+                var realPercent = 0.0;
+                for (int pageIndex = 1; pageIndex <= pageCount; pageIndex++)
+                {
+                    realPercent += (double)100 / pageCount;
+                    using (FileStream imageStream = new FileStream(fullFileName + "\\" + pageIndex + imgType,
+                        FileMode.Create))
+                    {
+                        Resolution resolution = new Resolution(300);
+                        JpegDevice jpegDevice = new JpegDevice(resolution, 100);
+                        jpegDevice.Process(pdfDocument.Pages[pageIndex], imageStream);
+                        imageStream.Close();
+                    }
+                    ProgrssNotice noticeCallback = noticeAction as ProgrssNotice;
+                    if (pageIndex == pdfDocument.Pages.Count)
+                    {
+                        realPercent = 100;
+                    }
+                    this.Invoke(noticeCallback, rowIndex, pageIndex, (int)realPercent);
+                }
+                rowIndex++;
+            }
+            convertThread = null;
+        }
+
+        /// <summary>
+        /// 获取转换后的图片后缀
+        /// </summary>
+        /// <returns></returns>
+        private string GetConvertedImgType()
+        {
+            var suffix = string.Empty;
+            var imgType = this.cboImgType.SelectedItem.ToString();
+            switch (imgType)
+            {
+                case "JPG":
+                    suffix = ".jpg";
+                    break;
+                case "PNG":
+                    suffix = ".png";
+                    break;
+                case "GIF":
+                    suffix = ".gif";
+                    break;
+                case "BMP":
+                    suffix = ".bmp";
+                    break;
+                case "TIF":
+                    suffix = ".tif";
+                    break;
+            }
+            return suffix;
+        }
+
+        public void ProgrssAction(int rowIndex, int pageIndex, int per)
+        {
+            try
+            {
+                this.tableFiles.TableModel.Rows[rowIndex].Cells[ProgressColIndex].Data = per;
+            }
+            catch (Exception)
+            {
+                convertThread.Abort();
+            }
+        }
+
+        private void ShowMsgBox(int height, string msg)
+        {
+            MetroSetMessageBox.Show(new FrmMessageBox(100), msg);
         }
     }
 }
