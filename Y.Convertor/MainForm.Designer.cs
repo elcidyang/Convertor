@@ -34,7 +34,7 @@
             this.tpPdfConvert = new MetroSet_UI.Child.MetroSetTabPage();
             this.panelContainer = new System.Windows.Forms.Panel();
             this.panel7 = new System.Windows.Forms.Panel();
-            this.metroSetButton2 = new MetroSet_UI.Controls.MetroSetButton();
+            this.btnOpenDir = new MetroSet_UI.Controls.MetroSetButton();
             this.btnSelectSavePath = new MetroSet_UI.Controls.MetroSetButton();
             this.lblSavePath = new MetroSet_UI.Controls.MetroSetLabel();
             this.metroSetLabel2 = new MetroSet_UI.Controls.MetroSetLabel();
@@ -152,7 +152,7 @@
             // 
             // panel7
             // 
-            this.panel7.Controls.Add(this.metroSetButton2);
+            this.panel7.Controls.Add(this.btnOpenDir);
             this.panel7.Controls.Add(this.btnSelectSavePath);
             this.panel7.Controls.Add(this.lblSavePath);
             this.panel7.Controls.Add(this.metroSetLabel2);
@@ -162,30 +162,31 @@
             this.panel7.Size = new System.Drawing.Size(608, 35);
             this.panel7.TabIndex = 2;
             // 
-            // metroSetButton2
+            // btnOpenDir
             // 
-            this.metroSetButton2.DisabledBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
-            this.metroSetButton2.DisabledBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
-            this.metroSetButton2.DisabledForeColor = System.Drawing.Color.Gray;
-            this.metroSetButton2.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.metroSetButton2.HoverBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(207)))), ((int)(((byte)(255)))));
-            this.metroSetButton2.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(207)))), ((int)(((byte)(255)))));
-            this.metroSetButton2.HoverTextColor = System.Drawing.Color.White;
-            this.metroSetButton2.Location = new System.Drawing.Point(502, 4);
-            this.metroSetButton2.Name = "metroSetButton2";
-            this.metroSetButton2.NormalBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
-            this.metroSetButton2.NormalColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
-            this.metroSetButton2.NormalTextColor = System.Drawing.Color.White;
-            this.metroSetButton2.PressBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(147)))), ((int)(((byte)(195)))));
-            this.metroSetButton2.PressColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(147)))), ((int)(((byte)(195)))));
-            this.metroSetButton2.PressTextColor = System.Drawing.Color.White;
-            this.metroSetButton2.Size = new System.Drawing.Size(96, 27);
-            this.metroSetButton2.Style = MetroSet_UI.Design.Style.Light;
-            this.metroSetButton2.StyleManager = null;
-            this.metroSetButton2.TabIndex = 3;
-            this.metroSetButton2.Text = "打开目录";
-            this.metroSetButton2.ThemeAuthor = "Narwin";
-            this.metroSetButton2.ThemeName = "MetroLite";
+            this.btnOpenDir.DisabledBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
+            this.btnOpenDir.DisabledBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
+            this.btnOpenDir.DisabledForeColor = System.Drawing.Color.Gray;
+            this.btnOpenDir.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnOpenDir.HoverBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(207)))), ((int)(((byte)(255)))));
+            this.btnOpenDir.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(207)))), ((int)(((byte)(255)))));
+            this.btnOpenDir.HoverTextColor = System.Drawing.Color.White;
+            this.btnOpenDir.Location = new System.Drawing.Point(502, 4);
+            this.btnOpenDir.Name = "btnOpenDir";
+            this.btnOpenDir.NormalBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
+            this.btnOpenDir.NormalColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
+            this.btnOpenDir.NormalTextColor = System.Drawing.Color.White;
+            this.btnOpenDir.PressBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(147)))), ((int)(((byte)(195)))));
+            this.btnOpenDir.PressColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(147)))), ((int)(((byte)(195)))));
+            this.btnOpenDir.PressTextColor = System.Drawing.Color.White;
+            this.btnOpenDir.Size = new System.Drawing.Size(96, 27);
+            this.btnOpenDir.Style = MetroSet_UI.Design.Style.Light;
+            this.btnOpenDir.StyleManager = null;
+            this.btnOpenDir.TabIndex = 3;
+            this.btnOpenDir.Text = "打开目录";
+            this.btnOpenDir.ThemeAuthor = "Narwin";
+            this.btnOpenDir.ThemeName = "MetroLite";
+            this.btnOpenDir.Click += new System.EventHandler(this.btnOpenDir_Click);
             // 
             // btnSelectSavePath
             // 
@@ -652,7 +653,7 @@
         private MetroSet_UI.Controls.MetroSetLabel metroSetLabel2;
         private MetroSet_UI.Controls.MetroSetButton btnSelectSavePath;
         private MetroSet_UI.Controls.MetroSetLabel lblSavePath;
-        private MetroSet_UI.Controls.MetroSetButton metroSetButton2;
+        private MetroSet_UI.Controls.MetroSetButton btnOpenDir;
         private System.Windows.Forms.TabPage tpOtherTools;
     }
 }

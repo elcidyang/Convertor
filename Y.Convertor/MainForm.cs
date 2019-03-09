@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using MetroSet_UI.Controls;
 using MetroSet_UI.Forms;
+using Y.Convertor.Common;
 using Y.Convertor.uc;
 
 namespace Y.Convertor
@@ -81,6 +82,25 @@ namespace Y.Convertor
             {
                 this.lblSavePath.Text = path;
             }
+        }
+
+        private void btnOpenDir_Click(object sender, System.EventArgs e)
+        {
+            if (!ValidConvertFilePath())
+            {
+                return;
+            }
+            System.Diagnostics.Process.Start("explorer.exe", this.lblSavePath.Text);
+        }
+
+        private bool ValidConvertFilePath()
+        {
+            if (string.IsNullOrEmpty(this.lblSavePath.Text.Trim()))
+            {
+                YMessageBox.ShowMsgBox(100, "请先选择要保存的路径！");
+                return false;
+            }
+            return true;
         }
     }
 }

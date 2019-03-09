@@ -20,9 +20,13 @@ namespace Y.Convertor.uc
     public partial class ucPdf2Img : UserControl
     {
         private MainForm _mainForm;
-        public delegate void ProgrssNotice(int rowIndex, int pageIndex, int per);
+        public delegate void ProgressNotice(NoticeResult result);
         public delegate void ConvertComplete();
         private Thread convertThread = null;
+        /// <summary>
+        /// 转换中的表行索引
+        /// </summary>
+        private int _convertingtablerowIndex;
         public ucPdf2Img(MainForm mainForm)
         {
             InitializeComponent();
@@ -75,11 +79,11 @@ namespace Y.Convertor.uc
                 ShowUpDownButtons = true
             };
             ProgressBarColumn progressColumn = new ProgressBarColumn("状态", 100);
-            ImageColumn deleteColumn = new ImageColumn("删除", 35)
+            ImageColumn deleteColumn = new ImageColumn("移除", 35)
             {
                 DrawText = false
             };
-            TextColumn filePathColumn = new TextColumn("文件路径",null,0,false);
+            TextColumn filePathColumn = new TextColumn("文件路径", null, 0, false);
             this.columnModel.Columns.AddRange(new Column[] {fileNameColumn,
                 fileSizeColumn,
                 pageStartColumn,
@@ -110,12 +114,34 @@ namespace Y.Convertor.uc
         {
             if (e.Column == DeleteColIndex)
             {
+                var currentRow = this.tableFiles.TableModel.Rows[e.Row];
                 this.tableFiles.TableModel.Rows.RemoveAt(e.Row);
                 if (this.tableFiles.TableModel.Rows.Count <= 0)
                 {
+                    if (convertThread != null && convertThread.IsAlive)
+                    {
+                        convertThread.Abort();
+                    }
                     SetConvertBtnVisiable(false);
+                    ConvertCompleteAction();
                     AddDragTip();
+                    return;
                 }
+                //判断移除行转换的状态
+                //重启线程转换
+                ProgressNotice notice = ProgressAction;//创建一个委托对象
+                ConvertComplete convertCompleted = ConvertCompleteAction;
+                if (convertThread != null && convertThread.IsAlive)
+                {
+                    convertThread.Abort();
+                }
+                convertThread = new Thread(StartConvert);
+                var imgType = GetConvertedImgType();
+                if ((ConvertState)currentRow.Tag == ConvertState.Converted)
+                {
+                    _convertingtablerowIndex--;
+                }
+                convertThread.Start(new List<object> { _convertingtablerowIndex, notice, convertCompleted, imgType });
             }
         }
         #endregion
@@ -173,7 +199,7 @@ namespace Y.Convertor.uc
             {
                 return;
             }
-            
+
             ClearDragTip();
             SetConvertBtnVisiable(true);
             var safeFiles = fileDialog.SafeFileNames;
@@ -208,6 +234,7 @@ namespace Y.Convertor.uc
                     new Cell("删除", Properties.Resources.trash_empty),
                     new Cell(pdfFile.FilePath)
                 });
+                row.Tag = ConvertState.NotConvert;
                 this.tableFiles.TableModel.Rows.Add(row);
                 this.tableFiles.TableModel.Rows[index].RowStyle = rowStyle;
                 index++;
@@ -215,7 +242,6 @@ namespace Y.Convertor.uc
 
             if (sameFilesName.Count > 0)
             {
-                var tip = string.Empty;
                 if (sameFilesName.Count > 5)
                 {
                     sameFilesName = sameFilesName.Take(5).ToList();
@@ -223,9 +249,155 @@ namespace Y.Convertor.uc
                 }
                 var height = sameFilesName.Count * 20 + 150;
                 var strNames = string.Join("\n", sameFilesName);
-                ShowMsgBox(height, $"下列文件：\n{strNames}\n已存在，将忽略添加！");
+                YMessageBox.ShowMsgBox(height, $"下列文件：\n{strNames}\n已存在，将忽略添加！");
             }
         }
+
+
+        private void btnContinueAdd_Click(object sender, EventArgs e)
+        {
+            ShowOpenFileDialog();
+        }
+
+        private void btnClearTable_Click(object sender, EventArgs e)
+        {
+            this.tableFiles.TableModel.Rows.Clear();
+        }
+
+        private void btnStartConvert_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(_mainForm.LbllblSavePath.Text.Trim()))
+            {
+                YMessageBox.ShowMsgBox(100, "请先选择要保存的路径！");
+                return;
+            }
+
+            this.btnStartConvert.Text = "转换中...";
+            SetConvertBtnEnable(false);
+            ProgressNotice notice = ProgressAction;//创建一个委托对象
+            ConvertComplete convertCompleted = ConvertCompleteAction;
+            if (convertThread != null)
+            {
+                convertThread = null;
+            }
+            convertThread = new Thread(StartConvert);
+            var imgType = GetConvertedImgType();
+            convertThread.Start(new List<object> { 0, notice, convertCompleted, imgType });
+        }
+
+        /// <summary>
+        /// 开始转换
+        /// </summary>
+        public void StartConvert(object p)
+        {
+            var savePath = _mainForm.LbllblSavePath.Text;
+            var parameters = p as List<object>;
+            _convertingtablerowIndex = Convert.ToInt32(parameters[0]);
+            var noticeAction = parameters[1];
+            var convertCompleteAction = parameters[2];
+            ConvertComplete completedCalback = convertCompleteAction as ConvertComplete;
+            ProgressNotice noticeCallback = noticeAction as ProgressNotice;
+            var imgType = parameters[3].ToString();
+            foreach (Row row in this.tableFiles.TableModel.Rows)
+            {
+                var filePath = row.Cells[FilePathColIndex].Text;
+                var fileName = row.Cells[FileNameColIndex].Text;
+                var fullFileName = Path.Combine(savePath, fileName.Contains(".") ?
+                    fileName.Remove(fileName.LastIndexOf(".")) : fileName);
+                if (!Directory.Exists(fullFileName))
+                {
+                    Directory.CreateDirectory(fullFileName);
+                }
+
+                try
+                {
+                    row.Tag = ConvertState.Converting;
+                    HandleDocumentToImg(filePath, fullFileName, imgType, noticeCallback, _convertingtablerowIndex);
+                }
+                catch (Exception ex)
+                {
+                    row.Tag = ConvertState.NotConvert;
+                    if (ex is InvalidPasswordException)
+                    {
+                        var noticeResult = new NoticeResult
+                        {
+                            Success = false,
+                            ErrMsg = $"文件\n{fileName}\n是加密文件，请先解密！"
+                        };
+                        this.Invoke(noticeCallback, noticeResult);
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                //标志为转换完成
+                if ((ConvertState)row.Tag == ConvertState.Converting)
+                {
+                    row.Tag = ConvertState.Converted;
+                }
+                _convertingtablerowIndex++;
+            }
+            this.Invoke(completedCalback);
+            convertThread = null;
+        }
+
+        private void HandleDocumentToImg(string filePath, string fullFileName, string imgType, ProgressNotice noticeCallback, int rowIndex)
+        {
+            Document pdfDocument = new Document(filePath);
+            var pageCount = pdfDocument.Pages.Count;
+            var realPercent = 0.0;
+            for (int pageIndex = 1; pageIndex <= pageCount; pageIndex++)
+            {
+                realPercent += (double)100 / pageCount;
+                using (FileStream imageStream = new FileStream(fullFileName + "\\" + pageIndex + imgType,
+                    FileMode.Create))
+                {
+                    Resolution resolution = new Resolution(300);
+                    JpegDevice jpegDevice = new JpegDevice(resolution, 100);
+                    jpegDevice.Process(pdfDocument.Pages[pageIndex], imageStream);
+                    imageStream.Close();
+                }
+                if (pageIndex == pdfDocument.Pages.Count)
+                {
+                    realPercent = 100;
+                }
+                var noticeResult = new NoticeResult
+                {
+                    Success = true,
+                    rowIndex = rowIndex,
+                    pageIndex = pageIndex,
+                    per = (int)realPercent
+                };
+                this.Invoke(noticeCallback, noticeResult);
+            }
+        }
+
+
+        private void ConvertCompleteAction()
+        {
+            this.btnStartConvert.Text = "开始转换";
+            SetConvertBtnEnable(true);
+        }
+        public void ProgressAction(NoticeResult result)
+        {
+            if (result.Success)
+            {
+                try
+                {
+                    this.tableFiles.TableModel.Rows[result.rowIndex].Cells[ProgressColIndex].Data = result.per;
+                }
+                catch (Exception)
+                {
+                    convertThread.Abort();
+                }
+            }
+            else
+            {
+                YMessageBox.ShowMsgBox(150, result.ErrMsg);
+            }
+        }
+
 
         /// <summary>
         /// 表格中是否已存在相同文件名文件
@@ -264,7 +436,7 @@ namespace Y.Convertor.uc
         {
             var pdfFile = new Pdf2JpgFileInfo();
             pdfFile.FilePath = filePath;
-            pdfFile.FileName = filePath.Substring(filePath.LastIndexOf("\\")+1, filePath.Length - filePath.LastIndexOf("\\") - 1);
+            pdfFile.FileName = filePath.Substring(filePath.LastIndexOf("\\") + 1, filePath.Length - filePath.LastIndexOf("\\") - 1);
             pdfFile.FileSize = Utils.CountSize(Utils.GetFileSize(filePath));
             return pdfFile;
         }
@@ -283,6 +455,13 @@ namespace Y.Convertor.uc
             }
         }
 
+        private void SetConvertBtnEnable(bool enable)
+        {
+            this.btnStartConvert.Enabled = enable;
+            this.btnClearTable.Enabled = enable;
+            this.btnContinueAdd.Enabled = enable;
+        }
+
         private void ClearDragTip()
         {
             this.lblTip.Hide();
@@ -297,74 +476,6 @@ namespace Y.Convertor.uc
             this.lblTip.Show();
             this.lblTip.Click += lblTip_Click;
             this.Click += ucPdf2Img_Click;
-        }
-
-        private void btnContinueAdd_Click(object sender, EventArgs e)
-        {
-            ShowOpenFileDialog();
-        }
-
-        private void btnStartConvert_Click(object sender, EventArgs e)
-        {
-            if (string.IsNullOrEmpty(_mainForm.LbllblSavePath.Text.Trim()))
-            {
-                ShowMsgBox(100, "请先选择要保存的路径！");
-                return;
-            }
-            ProgrssNotice notice = ProgrssAction;//创建一个委托对象
-            if (convertThread != null)
-            {
-                convertThread = null;
-            }
-            convertThread = new Thread(StartConvert);
-            var imgType = GetConvertedImgType();
-            convertThread.Start(new List<object> { notice,imgType });
-        }
-
-        /// <summary>
-        /// 开始转换
-        /// </summary>
-        public void StartConvert(object p)
-        {
-            var savePath = _mainForm.LbllblSavePath.Text;
-            var rowIndex = 0;
-            var parameters = p as List<object>;
-            var noticeAction = parameters[0];
-            var imgType = parameters[1].ToString();
-            foreach (Row row in this.tableFiles.TableModel.Rows)
-            {
-                var filePath = row.Cells[FilePathColIndex].Text;
-                var fileName = row.Cells[FileNameColIndex].Text;
-                var fullFileName = Path.Combine(savePath, fileName.Contains(".") ?
-                    fileName.Remove(fileName.LastIndexOf(".")) : fileName);
-                if (!Directory.Exists(fullFileName))
-                {
-                    Directory.CreateDirectory(fullFileName);
-                }
-                Document pdfDocument = new Document(filePath);
-                var pageCount = pdfDocument.Pages.Count;
-                var realPercent = 0.0;
-                for (int pageIndex = 1; pageIndex <= pageCount; pageIndex++)
-                {
-                    realPercent += (double)100 / pageCount;
-                    using (FileStream imageStream = new FileStream(fullFileName + "\\" + pageIndex + imgType,
-                        FileMode.Create))
-                    {
-                        Resolution resolution = new Resolution(300);
-                        JpegDevice jpegDevice = new JpegDevice(resolution, 100);
-                        jpegDevice.Process(pdfDocument.Pages[pageIndex], imageStream);
-                        imageStream.Close();
-                    }
-                    ProgrssNotice noticeCallback = noticeAction as ProgrssNotice;
-                    if (pageIndex == pdfDocument.Pages.Count)
-                    {
-                        realPercent = 100;
-                    }
-                    this.Invoke(noticeCallback, rowIndex, pageIndex, (int)realPercent);
-                }
-                rowIndex++;
-            }
-            convertThread = null;
         }
 
         /// <summary>
@@ -396,21 +507,36 @@ namespace Y.Convertor.uc
             return suffix;
         }
 
-        public void ProgrssAction(int rowIndex, int pageIndex, int per)
+        /// <summary>
+        /// 文件转换状态
+        /// </summary>
+        public enum ConvertState
         {
-            try
-            {
-                this.tableFiles.TableModel.Rows[rowIndex].Cells[ProgressColIndex].Data = per;
-            }
-            catch (Exception)
-            {
-                convertThread.Abort();
-            }
+            NotConvert = 0,
+            Converting = 1,
+            Converted = 2
         }
 
-        private void ShowMsgBox(int height, string msg)
+        /// <summary>
+        /// 转换消息返回结构
+        /// </summary>
+        public class NoticeResult
         {
-            MetroSetMessageBox.Show(new FrmMessageBox(100), msg);
+            public bool Success { get; set; }
+
+            public string ErrMsg { get; set; }
+            /// <summary>
+            /// 行索引
+            /// </summary>
+            public int rowIndex { get; set; }
+            /// <summary>
+            /// 页索引
+            /// </summary>
+            public int pageIndex { get; set; }
+            /// <summary>
+            /// 进度百分比
+            /// </summary>
+            public int per { get; set; }
         }
     }
 }

@@ -32,6 +32,7 @@
             this.btnStartConvert = new MetroSet_UI.Controls.MetroSetButton();
             this.btnContinueAdd = new MetroSet_UI.Controls.MetroDefaultSetButton();
             this.panelBottom = new System.Windows.Forms.Panel();
+            this.btnClearTable = new MetroSet_UI.Controls.MetroDefaultSetButton();
             this.cboImgType = new MetroSet_UI.Controls.MetroSetComboBox();
             this.metroSetLabel1 = new MetroSet_UI.Controls.MetroSetLabel();
             this.tableFiles = new XPTable.Models.Table();
@@ -62,7 +63,7 @@
             this.btnStartConvert.HoverBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(207)))), ((int)(((byte)(255)))));
             this.btnStartConvert.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(207)))), ((int)(((byte)(255)))));
             this.btnStartConvert.HoverTextColor = System.Drawing.Color.White;
-            this.btnStartConvert.Location = new System.Drawing.Point(412, 10);
+            this.btnStartConvert.Location = new System.Drawing.Point(473, 10);
             this.btnStartConvert.Name = "btnStartConvert";
             this.btnStartConvert.NormalBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
             this.btnStartConvert.NormalColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
@@ -88,7 +89,7 @@
             this.btnContinueAdd.HoverBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(102)))), ((int)(((byte)(102)))));
             this.btnContinueAdd.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(102)))), ((int)(((byte)(102)))));
             this.btnContinueAdd.HoverTextColor = System.Drawing.Color.White;
-            this.btnContinueAdd.Location = new System.Drawing.Point(285, 10);
+            this.btnContinueAdd.Location = new System.Drawing.Point(346, 10);
             this.btnContinueAdd.Name = "btnContinueAdd";
             this.btnContinueAdd.NormalBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
             this.btnContinueAdd.NormalColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(238)))));
@@ -107,6 +108,7 @@
             // 
             // panelBottom
             // 
+            this.panelBottom.Controls.Add(this.btnClearTable);
             this.panelBottom.Controls.Add(this.cboImgType);
             this.panelBottom.Controls.Add(this.metroSetLabel1);
             this.panelBottom.Controls.Add(this.btnStartConvert);
@@ -116,6 +118,32 @@
             this.panelBottom.Name = "panelBottom";
             this.panelBottom.Size = new System.Drawing.Size(608, 46);
             this.panelBottom.TabIndex = 4;
+            // 
+            // btnClearTable
+            // 
+            this.btnClearTable.DisabledBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
+            this.btnClearTable.DisabledBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(155)))), ((int)(((byte)(155)))));
+            this.btnClearTable.DisabledForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
+            this.btnClearTable.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClearTable.HoverBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(102)))), ((int)(((byte)(102)))));
+            this.btnClearTable.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(102)))), ((int)(((byte)(102)))));
+            this.btnClearTable.HoverTextColor = System.Drawing.Color.White;
+            this.btnClearTable.Location = new System.Drawing.Point(37, 10);
+            this.btnClearTable.Name = "btnClearTable";
+            this.btnClearTable.NormalBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
+            this.btnClearTable.NormalColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(238)))));
+            this.btnClearTable.NormalTextColor = System.Drawing.Color.Black;
+            this.btnClearTable.PressBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
+            this.btnClearTable.PressColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
+            this.btnClearTable.PressTextColor = System.Drawing.Color.White;
+            this.btnClearTable.Size = new System.Drawing.Size(96, 27);
+            this.btnClearTable.Style = MetroSet_UI.Design.Style.Light;
+            this.btnClearTable.StyleManager = null;
+            this.btnClearTable.TabIndex = 3;
+            this.btnClearTable.Text = "清空列表";
+            this.btnClearTable.ThemeAuthor = "Narwin";
+            this.btnClearTable.ThemeName = "MetroLite";
+            this.btnClearTable.Click += new System.EventHandler(this.btnClearTable_Click);
             // 
             // cboImgType
             // 
@@ -139,7 +167,7 @@
             "GIF",
             "BMP",
             "TIF"});
-            this.cboImgType.Location = new System.Drawing.Point(129, 10);
+            this.cboImgType.Location = new System.Drawing.Point(243, 10);
             this.cboImgType.Name = "cboImgType";
             this.cboImgType.SelectedItemBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
             this.cboImgType.SelectedItemForeColor = System.Drawing.Color.White;
@@ -153,7 +181,7 @@
             // metroSetLabel1
             // 
             this.metroSetLabel1.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.metroSetLabel1.Location = new System.Drawing.Point(31, 12);
+            this.metroSetLabel1.Location = new System.Drawing.Point(145, 12);
             this.metroSetLabel1.Name = "metroSetLabel1";
             this.metroSetLabel1.Size = new System.Drawing.Size(103, 23);
             this.metroSetLabel1.Style = MetroSet_UI.Design.Style.Light;
@@ -176,6 +204,7 @@
             this.tableFiles.HideSelection = true;
             this.tableFiles.Location = new System.Drawing.Point(0, 0);
             this.tableFiles.Name = "tableFiles";
+            this.tableFiles.NoItemsText = "";
             this.tableFiles.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
             this.tableFiles.SelectionForeColor = System.Drawing.Color.White;
             this.tableFiles.SelectionStyle = XPTable.Models.SelectionStyle.Grid;
@@ -216,5 +245,6 @@
         private XPTable.Models.Table tableFiles;
         private XPTable.Models.ColumnModel columnModel;
         private XPTable.Models.TableModel tableModel;
+        private MetroSet_UI.Controls.MetroDefaultSetButton btnClearTable;
     }
 }

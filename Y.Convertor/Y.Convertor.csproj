@@ -70,6 +70,7 @@
   <ItemGroup>
     <Compile Include="Common\RmbUpperConverter.cs" />
     <Compile Include="Common\Utils.cs" />
+    <Compile Include="Common\YMessageBox.cs" />
     <Compile Include="FrmMessageBox.cs">
       <SubType>Form</SubType>
     </Compile>
