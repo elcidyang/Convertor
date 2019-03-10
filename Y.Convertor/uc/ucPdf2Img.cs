@@ -262,6 +262,8 @@ namespace Y.Convertor.uc
         private void btnClearTable_Click(object sender, EventArgs e)
         {
             this.tableFiles.TableModel.Rows.Clear();
+            SetConvertBtnVisiable(false);
+            AddDragTip();
         }
 
         private void btnStartConvert_Click(object sender, EventArgs e)
